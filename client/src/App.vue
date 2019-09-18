@@ -1,28 +1,27 @@
 <template>
   <v-app>
-    <v-app-bar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>愛心送餐系統</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn to="submit" target="_blank">
-        <span class="mr-2">新增訂單</span>
-      </v-btn>
-    </v-app-bar>
+    <ToolBar title="愛心送餐系統"></ToolBar>
 
     <v-content>
-      <router-view></router-view>
+      <keep-alive>
+        <router-view v-if="$route.meta.keepAlive"></router-view>
+      </keep-alive>
+      <router-view v-if="!$route.meta.keepAlive"></router-view>
     </v-content>
+    <BottomNav />
   </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
+import ToolBar from './components/v1/ToolBar.vue';
+import BottomNav from './components/v1/BottomNav.vue';
+// import HelloWorld from "./components/HelloWorld";
 
 export default {
   name: "App",
   components: {
-    HelloWorld
+    ToolBar, BottomNav
+    // HelloWorld
   },
   data: () => ({
     //

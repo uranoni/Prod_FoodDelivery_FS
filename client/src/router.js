@@ -22,9 +22,27 @@ export default new Router({
       component: () => import('./views/List.vue')
     },
     {
-      path: '/detail/:id',
-      name: 'detail',
-      component: () => import('./views/Detail.vue')
-    }
+      path: '/order',
+      name: 'order',
+      component: () => import('./views/v1/Order.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/history',
+      name: 'history',
+      component: () => import('./views/v1/History.vue')
+    },
+    {
+      path: '/qrcode',
+      name: 'qrcode',
+      component: () => import('./views/v1/QRcode.vue')
+    },
+    {
+      path: '/driver',
+      name: 'driver',
+      component: () => import('./views/v1/Driver.vue')
+    }             
   ]
 })

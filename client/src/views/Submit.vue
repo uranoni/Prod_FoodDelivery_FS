@@ -44,21 +44,22 @@ export default {
   }),
   methods: {
     suborder() {
-      axios
-        .post("order/createOrder", {
-          receiver: this.receiver,
-          order: this.order,
-          subaddress: this.subaddress,
-          readdress: this.readdress,
-          paymethods: this.paymethods
-        })
-        .then(res => {
-          console.log(res);
-          alert("建立成功");
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      this.$emit('onSuccess')
+      // axios
+      //   .post("order/createOrder", {
+      //     receiver: this.receiver,
+      //     order: this.order,
+      //     subaddress: this.subaddress,
+      //     readdress: this.readdress,
+      //     paymethods: this.paymethods
+      //   })
+      //   .then(res => {
+      //     console.log(res);
+      //     alert("建立成功");
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   });
     }
   }
 };
