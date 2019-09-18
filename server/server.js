@@ -1,32 +1,49 @@
-const express = require('express');
-const mongoose = require('mongoose');
+require("./config/config");
+const express = require("express");
+const mongoose = require("mongoose");
 const morgan = require("morgan");
-const cors = require("cors");
+const db = require("./models");
+const authtication = require("./middleware/authentication");
+const userRoute = require("./routes/user");
 
-mongoose.connect('mongodb://localhost:27017/food', {
-    useCreateIndex: true,
-    useNewUrlParser: true
+const app = express();
+
+mongoose
+  .connect("mongodb://localhost/makersystem", { useNewUrlParser: true })
+  .then(() => {
+    console.log("Connected to Database!");
+  })
+  .catch(err => {
+    console.log("Not Connected to Database ERROR! ", err);
+  });
+mongoose.set("useCreateIndex", true);
+
+app.use(morgan("dev"));
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true
+  })
+);
+
+app.use((req, res, next) => {
+  req.db = db;
+  next();
+});
+app.use(authtication);
+
+app.use("/", userRoute);
+
+app.get("/", (req, res) => {
+  const user_agent = req.get("user-agent");
+  const request_ip = req.connection.remoteAddress;
+  res.send(
+    `
+    <h1>Hello world</h1>
+    <h3>user_agent: ${user_agent}</h3>
+    <h3>request_ip: ${request_ip}</h3>
+    `
+  );
 });
 
-var orderRouter = require('./api/order.js')
-
-
-var app = express();
-app.use(morgan("dev"));
-app.use(cors());
-
-app.use(express.json({ limit: '200mb' }));
-app.use(express.static(__dirname))
-
-app.use(express.urlencoded({
-    extended: true,
-    limit: '200mb'
-}));
-
-
-app.use('/api/order', orderRouter)
-
-
-app.listen(3000, () => {
-    console.log(`http://localhost:3000`);
-})
+app.listen(process.env.PORT, () => console.log(`start up: 3000`));
