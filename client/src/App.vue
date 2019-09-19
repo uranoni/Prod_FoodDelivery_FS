@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <ToolBar title="愛心送餐系統"></ToolBar>
+    <ToolBar title="食載有你"></ToolBar>
 
     <v-content>
       <keep-alive>
@@ -13,14 +13,15 @@
 </template>
 
 <script>
-import ToolBar from './components/v1/ToolBar.vue';
-import BottomNav from './components/v1/BottomNav.vue';
+import ToolBar from "./components/v1/ToolBar.vue";
+import BottomNav from "./components/v1/BottomNav.vue";
 // import HelloWorld from "./components/HelloWorld";
 
 export default {
   name: "App",
   components: {
-    ToolBar, BottomNav
+    ToolBar,
+    BottomNav
     // HelloWorld
   },
   data: () => ({
