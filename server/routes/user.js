@@ -3,7 +3,14 @@ const _ = require("lodash");
 const router = Router();
 
 router.post("/signup", async (req, res) => {
-  const body = _.pick(req.body, ["password", "username", "email", "role"]);
+  const body = _.pick(req.body, [
+    "password",
+    "age",
+    "email",
+    "role",
+    "name",
+    "phone"
+  ]);
 
   const user_agent = req.get("user-agent");
   const request_ip = req.connection.remoteAddress;
@@ -15,7 +22,7 @@ router.post("/signup", async (req, res) => {
       user_agent
     );
     res.header("access_token", token);
-    res.send(user);
+    res.send(user.toJSON());
   } catch (err) {
     res.status(400).send(err);
   }
@@ -36,7 +43,7 @@ router.post("/login", async (req, res) => {
       user_agent
     );
     res.header("access_token", token);
-    res.send(user);
+    res.send(user.toJSON());
   } catch (err) {
     res.status(400).send(err);
   }
@@ -63,16 +70,16 @@ router.delete("/logout", (req, res) => {
 router.get("/user", (req, res) => {
   if (!req.user && !req.token)
     return res.status(401).send("You must to be login!");
-  res.send(req.user);
+  res.send(req.user.toJSON());
 });
 
 router.patch("/user", async (req, res) => {
   if (!req.user && !req.token)
     return res.status(401).send("You must to be login!");
-  const body = _.pick(req.body, ["username"]);
+  const body = _.pick(req.body, ["name", "age", "phone"]);
   await req.user.updateOne({ $set: body });
   const updatedUser = await req.db.User.findById(req.user._id);
-  res.send(updatedUser);
+  res.send(updatedUser.toJSON());
 });
 
 router.patch("/password", async (req, res) => {
@@ -81,7 +88,7 @@ router.patch("/password", async (req, res) => {
   const body = _.pick(req.body, ["password"]);
   req.user.password = body.password;
   const updatedUser = await req.user.save();
-  res.send(updatedUser);
+  res.send(updatedUser.toJSON());
 });
 
 module.exports = router;

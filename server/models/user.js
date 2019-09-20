@@ -4,12 +4,18 @@ const jwt = require("jsonwebtoken");
 
 const schema = mongoose.Schema(
   {
+    age: {
+      type: Number
+    },
+    phone: {
+      type: String
+    },
     password: {
       type: String,
       minlength: [6, "Minimum 6 characters required!"],
       required: true
     },
-    username: String,
+    name: String,
     email: {
       type: String,
       validate: {
@@ -23,7 +29,7 @@ const schema = mongoose.Schema(
       unique: true,
       required: true
     },
-    role: { type: String, enum: ["ADMIN", "USER", "MAKER"] },
+    role: { type: String, enum: ["ADMIN", "USER", "STORE"] },
     tokens: [
       {
         token: {
@@ -46,6 +52,12 @@ const schema = mongoose.Schema(
     timestamps: true
   }
 );
+
+schema.methods.toJSON = function() {
+  var obj = this.toObject();
+  delete obj.password;
+  return obj;
+};
 
 schema.methods.generateAuthToken = function(request_ip, user_agent) {
   const user = this;
