@@ -34,9 +34,9 @@
                       <v-icon x-large class="blue--text text--lighten-2">public</v-icon>
                     </v-card-text>
                     <v-card-title primary-title class="layout justify-center">
-                      <div class="headline text-xs-center">Reach the world</div>
+                      <div class="headline text-xs-center">地方社區服務</div>
                     </v-card-title>
-                    <v-card-text>Show your stuff to the whole community of Endorfine not only to your mum or your friends. We love making good content viral. In this moment Endorfine is used by artists who are not famous but that want to share their works to the world. Unfortunately with other social networks this is hard, slow and sometime expensive.</v-card-text>
+                    <v-card-text>幫助在地年長者以及行動不便者享用熱騰騰的便當</v-card-text>
                   </v-card>
                 </v-flex>
                 <v-flex xs12 md4>
@@ -45,9 +45,9 @@
                       <v-icon x-large class="blue--text text--lighten-2">flash_on</v-icon>
                     </v-card-text>
                     <v-card-title primary-title class="layout justify-center">
-                      <div class="headline">Fast feedback</div>
+                      <div class="headline">下單快速便利</div>
                     </v-card-title>
-                    <v-card-text>Time is important, we don't want you to waste it. Here you can get a massive feedback from real users in minutes. And if your stuff is appreciated you won't only get positive feedback but also lovely and sincere fans <3</v-card-text>
+                    <v-card-text>線上整合店家菜單列表，即同步更新店家營業時間</v-card-text>
                   </v-card>
                 </v-flex>
                 <v-flex xs12 md4>
@@ -56,9 +56,9 @@
                       <v-icon x-large class="blue--text text--lighten-2">share</v-icon>
                     </v-card-text>
                     <v-card-title primary-title class="layout justify-center">
-                      <div class="headline text-xs-center">Create new connections</div>
+                      <div class="headline text-xs-center">連結服務</div>
                     </v-card-title>
-                    <v-card-text>Imagine if you can directly speak with the world's population. Don't you think it would be easier to find nice people to interact with? Endorfine is both local and global and help you to connect without limitations with people from your city, your state and your universe!</v-card-text>
+                    <v-card-text>追蹤訂單以及外送員位置</v-card-text>
                   </v-card>
                 </v-flex>
               </v-layout>
@@ -67,7 +67,7 @@
         </v-layout>
       </section>
 
-      <section>
+      <!-- <section>
         <v-parallax :src="imageLink.main" height="380">
           <v-layout column align-center justify-center>
             <div
@@ -114,9 +114,9 @@
             </v-flex>
           </v-layout>
         </v-container>
-      </section>
+      </section>-->
 
-      <section>
+      <!-- <section>
         <v-parallax :src="imageLink.social_cover" height="380">
           <v-layout column align-center justify-center>
             <div
@@ -135,7 +135,7 @@
             <v-icon x-large dark>fab fa-discord</v-icon>
           </v-layout>
         </v-parallax>
-      </section>
+      </section>-->
 
       <section>
         <v-container grid-list-xl>
@@ -145,7 +145,7 @@
                 <v-card-title primary-title class="layout justify-center">
                   <div class="headline">Company info</div>
                 </v-card-title>
-                <v-card-text>We are not a company. We hate companies. Just imagine us like the guys from the Silicon Valley series.</v-card-text>
+                <v-card-text>我們是聯合大學資訊工程學系</v-card-text>
               </v-card>
             </v-flex>
             <v-flex xs12 sm4 offset-sm1>
@@ -153,7 +153,7 @@
                 <v-card-title primary-title class="layout justify-center">
                   <div class="headline">We are hiring</div>
                 </v-card-title>
-                <v-card-text>Are you a creative person? Do you like techy stuff? Complete the email form by writing your skills and interests</v-card-text>
+                <v-card-text>誠徵廣告及文宣宣傳人員</v-card-text>
               </v-card>
             </v-flex>
           </v-layout>
@@ -176,7 +176,7 @@
             <div class="white--text ml-3">
               Made with
               <v-icon class="red--text">favorite</v-icon>using
-              <a class="white--text" href="https://vuetifyjs.com" target="_blank">Vuetify</a>
+              <a class="white--text" href="https://vuetifyjs.com" target="_blank">Vuetify UI</a>
             </div>
           </v-flex>
         </v-layout>
