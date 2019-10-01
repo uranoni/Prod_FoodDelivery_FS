@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema(
   {
-    status: Boolean,
     name: String,
     owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     photos: [String],
@@ -50,6 +49,6 @@ const schema = mongoose.Schema(
     timestamps: true
   }
 );
-schema.index({ location: "2dsphere" });
 
-module.exports = mongoose.model("Store", schema);
+
+module.exports = mongoose.model("Menu", schema);
