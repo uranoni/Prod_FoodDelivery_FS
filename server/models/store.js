@@ -23,4 +23,4 @@ const schema = mongoose.Schema(
 );
 schema.index({ location: "2dsphere" });
 
-module.exports = mongoose.model("Maker", schema);
+module.exports = mongoose.model("Store", schema);

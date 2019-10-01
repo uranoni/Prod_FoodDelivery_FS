@@ -1,5 +1,5 @@
-const Maker = require("./maker");
+const Store = require("./store");
 const Product = require("./product");
 const User = require("./user");
 
-module.exports = { Maker, User, Product };
+module.exports = { Store, User, Product };

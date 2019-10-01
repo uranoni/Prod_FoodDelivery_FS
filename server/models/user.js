@@ -46,6 +46,14 @@ const schema = mongoose.Schema(
     forgot: {
       expire: Date,
       token: String
+    },
+    online: {
+      type: Boolean,
+      default: false
+    },
+    status: {
+      type: Boolean,
+      default: true
     }
   },
   {

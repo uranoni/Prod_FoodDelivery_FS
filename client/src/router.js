@@ -43,6 +43,11 @@ export default new Router({
       path: '/driver',
       name: 'driver',
       component: () => import('./views/v1/Driver.vue')
-    }             
+    },
+    {
+      path: "/signform",
+      name: "signForm",
+      component: () => import('./components/v1/SignForm.vue')
+    }
   ]
 })
