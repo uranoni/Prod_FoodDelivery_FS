@@ -1,24 +1,23 @@
 <template>
   <v-app-bar app>
     <v-toolbar-title class="headline text-uppercase">
-      <span>
-        {{ title }}
-      </span>
+      <v-card to="/">{{ title }}</v-card>
     </v-toolbar-title>
     <v-spacer></v-spacer>
+    <v-btn>會員註冊</v-btn>
     <!-- <v-btn to="submit" target="_blank">
       <span class="mr-2">新增訂單</span>
-    </v-btn> -->
+    </v-btn>-->
   </v-app-bar>
 </template>
 
 <script>
 export default {
-  name: 'ToolBar',
+  name: "ToolBar",
   props: {
     title: {
       type: String
     }
   }
-}
+};
 </script>
