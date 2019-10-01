@@ -7,7 +7,7 @@ const cors = require("cors");
 const db = require("./models");
 const authtication = require("./middleware/authentication");
 const userRoute = require("./routes/user");
-
+const storeRoute = require("./routes/store");
 const app = express();
 
 mongoose
@@ -40,6 +40,7 @@ app.use((req, res, next) => {
 
 app.use(authtication);
 app.use("/api", userRoute);
+app.use("/api/store", storeRoute);
 
 app.get("/", (req, res) => {
   const user_agent = req.get("user-agent");
