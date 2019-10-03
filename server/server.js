@@ -9,6 +9,8 @@ const authtication = require("./middleware/authentication");
 const userRoute = require("./routes/user");
 const storeRoute = require("./routes/store");
 const menuRoute = require("./routes/menu");
+const productRoute = require("./routes/product");
+
 const app = express();
 
 mongoose
@@ -19,7 +21,7 @@ mongoose
   .then(() => {
     console.log("Connected to Database!");
   })
-  .catch(err => {
+  .catch((err) => {
     console.log("Not Connected to Database ERROR! ", err);
   });
 mongoose.set("useCreateIndex", true);
@@ -43,6 +45,8 @@ app.use(authtication);
 app.use("/api", userRoute);
 app.use("/api/store", storeRoute);
 app.use("/api/menu", menuRoute);
+app.use("/api/product", productRoute);
+
 app.get("/", (req, res) => {
   const user_agent = req.get("user-agent");
   const request_ip = req.connection.remoteAddress;
