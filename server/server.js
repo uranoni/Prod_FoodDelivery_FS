@@ -8,6 +8,7 @@ const db = require("./models");
 const authtication = require("./middleware/authentication");
 const userRoute = require("./routes/user");
 const storeRoute = require("./routes/store");
+const menuRoute = require("./routes/menu");
 const app = express();
 
 mongoose
@@ -41,7 +42,7 @@ app.use((req, res, next) => {
 app.use(authtication);
 app.use("/api", userRoute);
 app.use("/api/store", storeRoute);
-
+app.use("/api/menu", menuRoute);
 app.get("/", (req, res) => {
   const user_agent = req.get("user-agent");
   const request_ip = req.connection.remoteAddress;

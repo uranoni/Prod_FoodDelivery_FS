@@ -5,18 +5,13 @@ menuRouter.post("/create", async (req, res) => {
     if (!req.user) {
         res.status(401).send("User not found")
     }
-    const { menu_id,name,description,price } = req.body
+    const { name } = req.body
     try {
-        const menu = await req.db.Menu.findOne({_id:menu_id})
-        if(!menu){
-            return res.status(404).send('can not find this menu')
-        }
-        const product  = new req.db.Product({name,description,price})
-        const product_res = await product.save();
-        menu.products.push({online:true,product:product_res._id})
-        menu.save()
+        const newMenu = new req.db.Menu({name})
+        const result = await newMenu.save()
+        return res.send(result)
     } catch (error) {
-        
+        return res.status(401).send(error)
     }
 });
 
