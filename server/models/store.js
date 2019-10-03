@@ -40,7 +40,7 @@ const schema = mongoose.Schema(
       },
       menu: [
         {
-          type: String,
+          online: Boolean,
           menuname: { type: mongoose.Schema.Types.ObjectId, ref: "Menu" }
         }
       ]

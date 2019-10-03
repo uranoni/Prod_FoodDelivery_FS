@@ -19,6 +19,33 @@ storeRouter.post("/open", async (req, res) => {
     }
 });
 
-storeRouter.post('/create')
+storeRouter.delete('/remove', async (req, res) => {
+    const { _id } = req.body
+    try {
+        const result = await req.db.Store.findOne({ _id })
+        if (!result) {
+            return res.status(404).send('can not find anything')
+        }
+        // console.log(req.user._id)
+        // console.log(result.owner)
+        // console.log(req.user._id.toString() == result.owner.toString())
+        if (req.user._id.toString() != result.owner.toString()) {
+            return res.status(402).send('It is not your store')
+        }
+        try {
+            const data = await req.db.Store.findOneAndRemove({ _id })
+            if (!data) {
+                return res.status(404).send('can not find anything')
+            }
+            return res.send(data)
+        } catch (error) {
+            return res.status(404).send('can not find anything')
+        }
+    } catch (error) {
+        return res.status(404).send('can not find anything')
+    }
+
+    
+})
 
 module.exports = storeRouter;
