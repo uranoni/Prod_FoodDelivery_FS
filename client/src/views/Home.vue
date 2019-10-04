@@ -225,10 +225,6 @@ export default {
       console.log("new image height is " + (this.pageHeight - offset));
       return this.pageHeight - offset;
     }
-  },
-
-  mounted: function() {
-    this.calculateHeight();
   }
 };
 </script>

@@ -32,7 +32,12 @@ export default new Router({
     {
       path: "/signup",
       name: "signup",
-      component: () => import("./views/v1/SignUp.vue")
+      component: () => import("./components/v1/SignUpForm.vue")
+    },
+    {
+      path: "/signin",
+      name: "signin",
+      component: () => import("./components/v1/SignInForm.vue")
     },
     {
       path: "/history",
@@ -48,11 +53,6 @@ export default new Router({
       path: "/driver",
       name: "driver",
       component: () => import("./views/v1/Driver.vue")
-    },
-    {
-      path: "/signform",
-      name: "signForm",
-      component: () => import("./components/v1/SignForm.vue")
     }
   ]
 });

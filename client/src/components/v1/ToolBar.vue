@@ -4,7 +4,6 @@
       <v-card to="/">{{ title }}</v-card>
     </v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn>會員註冊</v-btn>
     <!-- <v-btn to="submit" target="_blank">
       <span class="mr-2">新增訂單</span>
     </v-btn>-->

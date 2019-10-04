@@ -54,7 +54,8 @@ export default {
         email: "",
         age: "",
         phone: ""
-      }
+      },
+      errors: ""
     };
   },
   methods: {
@@ -63,10 +64,18 @@ export default {
         axios
           .post("signup", this.form)
           .then(res => {
-            console.log(res.data);
+            alert("註冊成功!!");
+            this.$router.push({ path: "signin" });
           })
           .catch(err => {
-            console.log(err);
+            // console.log(err.response);
+            if (err.response != null) {
+              Object.keys(err.response.data.errors).map((objectKey, index) => {
+                var value = err.response.data.errors[objectKey].message;
+                this.errors += value + "\n";
+              });
+              alert(this.errors);
+            }
           });
       }
     }
