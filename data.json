@@ -1,0 +1,22 @@
+{
+    "name": "麥當勞歡樂送",
+    "phone": "0912345678",
+    "address": "苗栗市中山路",
+    "businesshours": {
+        "MON": {
+            "start": 900,
+            "end": 1700
+        },
+        "TUE": {
+            "start": 900,
+            "end": 1700
+        }
+    }
+}
+
+{
+    "menu_id":"",
+    ,"name":"",
+    ,"description":"",
+    ,"price":""
+}

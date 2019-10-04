@@ -7,8 +7,6 @@ const schema = mongoose.Schema(
     price: Number,
     photos: [String],
     tags: [String],
-    maker_id: { type: mongoose.Schema.Types.ObjectId, ref: "Maker" },
-    creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
   },
   {
     timestamps: true

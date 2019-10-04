@@ -7,6 +7,9 @@ const cors = require("cors");
 const db = require("./models");
 const authtication = require("./middleware/authentication");
 const userRoute = require("./routes/user");
+const storeRoute = require("./routes/store");
+const menuRoute = require("./routes/menu");
+const productRoute = require("./routes/product");
 
 const app = express();
 
@@ -18,7 +21,7 @@ mongoose
   .then(() => {
     console.log("Connected to Database!");
   })
-  .catch(err => {
+  .catch((err) => {
     console.log("Not Connected to Database ERROR! ", err);
   });
 mongoose.set("useCreateIndex", true);
@@ -40,6 +43,9 @@ app.use((req, res, next) => {
 
 app.use(authtication);
 app.use("/api", userRoute);
+app.use("/api/store", storeRoute);
+app.use("/api/menu", menuRoute);
+app.use("/api/product", productRoute);
 
 app.get("/", (req, res) => {
   const user_agent = req.get("user-agent");
