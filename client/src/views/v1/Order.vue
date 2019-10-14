@@ -65,10 +65,10 @@
           <v-divider></v-divider>
 
           <v-list two-line v-if="showStore">
-            <v-list-item v-for="(item, index) in store" :key="index" @click="e1 = 2">
-              <v-list-item-content>
-                <v-list-item-title v-text="item.name"></v-list-item-title>
-                <v-list-item-subtitle v-text="item._id"></v-list-item-subtitle>
+            <v-list-item v-for="(item, index) in store" :key="index">
+              <v-list-item-content @click="storemenu(item._id)">
+                <v-list-item-title v-text="item.name"></v-list-item-title>聯絡電話
+                <v-list-item-subtitle v-text="item.phone"></v-list-item-subtitle>
               </v-list-item-content>
 
               <v-list-item-action>
@@ -91,22 +91,22 @@
         <v-stepper-content step="2">
           <div>
             <v-row>
-              <v-col cols="6">
+              <!-- <v-col cols="6">
                 <v-text-field label="店家名稱" outlined></v-text-field>
               </v-col>
               <v-col cols="6">
                 <v-text-field label="預估等待時間" outlined></v-text-field>
-              </v-col>
-              <v-col cols="6">
+              </v-col>-->
+              <!-- <v-col cols="6">
                 <v-text-field label="品項" outlined></v-text-field>
               </v-col>
               <v-col cols="6">
                 <v-text-field label="數量" type="number" outlined></v-text-field>
-              </v-col>
+              </v-col>-->
               <v-col class="text-right">
                 <v-btn text @click="e1 = 1">返回</v-btn>
 
-                <v-btn color="primary" @click="showStore = !showStore">確認</v-btn>
+                <!-- <v-btn color="primary" @click="showStore = !showStore">確認</v-btn> -->
               </v-col>
             </v-row>
           </div>
@@ -114,14 +114,20 @@
           <v-divider></v-divider>
 
           <v-row>
-            <v-col cols="6" v-for="i in 12" :key="`item_${i}`">
-              <v-card color="grey lighten-1" height="150"></v-card>
+            <v-col cols="6" v-for="(item,idx) in product" :key="`item_${idx}`">
+              <v-card @click="gonext(item._id)">
+                <v-card-title>{{item.name}}</v-card-title>
+
+                <v-img class="white--text align-end" height="100px" width="100px" :src="item.pic" />
+                <v-list-item-subtitle>價錢 : {{item.price}}</v-list-item-subtitle>
+                <v-list-item-subtitle>卡洛里 : {{item.cal}}</v-list-item-subtitle>
+              </v-card>
             </v-col>
           </v-row>
 
-          <div class="text-center">
+          <!-- <div class="text-center">
             <v-btn color="success" @click="e1 = 3">填寫聯絡資訊</v-btn>
-          </div>
+          </div>-->
 
           <!-- <v-btn text @click="e1 = 1">返回</v-btn> -->
           <v-btn
@@ -138,7 +144,12 @@
         </v-stepper-content>
 
         <v-stepper-content step="3">
-          <fd-form v-on:onSuccess="_onSuccess()"></fd-form>
+          <fd-form
+            :menu="menu"
+            :orderDate="orderDate"
+            :orderTime="orderTime"
+            v-on:onSuccess="_onSuccess()"
+          ></fd-form>
 
           <v-btn text @click="e1 = 2">返回</v-btn>
         </v-stepper-content>
@@ -165,34 +176,24 @@ export default {
   data() {
     return {
       e1: 0,
+      storeID: "",
       showStore: false,
       orderDate: null,
       orderTime: null,
       dialog: false,
       dialogMode: null,
-      store: [
-        {
-          name: "Store 1",
-          _id: "s1"
-        },
-        {
-          name: "Store 2",
-          _id: "s2"
-        },
-        {
-          name: "Store 3",
-          _id: "s3"
-        },
-        {
-          name: "Store 4",
-          _id: "s4"
-        },
-        {
-          name: "Store 5",
-          _id: "s5"
-        }
-      ]
+      store: [],
+      product: [],
+      menu: ""
     };
+  },
+  mounted() {
+    axios
+      .get("/store/storelist")
+      .then(res => {
+        this.store = res.data;
+      })
+      .catch(err => console.log(error));
   },
   methods: {
     _onSuccess() {
@@ -201,6 +202,24 @@ export default {
     OpenDialog(mode) {
       this.dialog = true;
       this.dialogMode = mode;
+    },
+    storemenu(id) {
+      this.e1 = 2;
+      this.storeID = id;
+      console.log(id);
+      axios
+        .get(`/product/getall/${this.storeID}`)
+        .then(res => {
+          this.product = res.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    gonext(id) {
+      this.e1 = 3;
+      this.menu = id;
+      console.log("menu", this.menu);
     }
   }
 };

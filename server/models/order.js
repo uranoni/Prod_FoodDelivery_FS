@@ -2,13 +2,17 @@ const mongoose = require("mongoose");
 
 const schema = mongoose.Schema(
   {
-    name: String,
-    description: String,
-    price: Number,
-    photos: String,
+    product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
     tags: [String],
     arriveTime: Date,
-    owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
+    arriveAddress: String,
+    payment: {
+      type: String,
+      type: String,
+      enum: ["LINE", "CASH", "CARD"]
+    },
+    order: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    reciver: String
   },
   {
     timestamps: true

@@ -10,6 +10,7 @@ const userRoute = require("./routes/user");
 const storeRoute = require("./routes/store");
 const menuRoute = require("./routes/menu");
 const productRoute = require("./routes/product");
+const ordertRoute = require("./routes/order");
 
 const app = express();
 
@@ -50,6 +51,7 @@ app.use("/api", userRoute);
 app.use("/api/store", storeRoute);
 app.use("/api/menu", menuRoute);
 app.use("/api/product", productRoute);
+app.use("/api/order", ordertRoute);
 
 app.get("/", (req, res) => {
   const user_agent = req.get("user-agent");

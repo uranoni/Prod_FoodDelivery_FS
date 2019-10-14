@@ -5,8 +5,10 @@ const schema = mongoose.Schema(
     name: String,
     description: String,
     price: Number,
-    photos: [String],
+    pic: String,
+    cal: String,
     tags: [String],
+    store: { type: mongoose.Schema.Types.ObjectId, ref: "Store" }
   },
   {
     timestamps: true

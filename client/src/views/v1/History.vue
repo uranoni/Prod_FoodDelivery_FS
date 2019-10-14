@@ -1,10 +1,11 @@
 <template>
   <v-container>
     <v-list two-line>
-      <v-list-item v-for="(item, index) in store" :key="index" @click="e1 = 2">
+      <v-list-item v-for="(item, index) in list" :key="index" @click="e1 = 2">
         <v-list-item-content>
-          <v-list-item-title v-text="item.name"></v-list-item-title>
-          <v-list-item-subtitle v-text="item._id"></v-list-item-subtitle>
+          <v-list-item-title v-text="item.product.name"></v-list-item-title>
+          <v-list-item-subtitle v-text="item.product.price"></v-list-item-subtitle>
+          <v-list-item-subtitle v-text="item.arriveTime"></v-list-item-subtitle>
         </v-list-item-content>
 
         <v-list-item-action>
@@ -18,39 +19,28 @@
 </template>
 
 <script>
-
 export default {
-  data () {
+  data() {
     return {
       e1: 0,
       showStore: false,
       orderDate: null,
       orderTime: null,
-      store: [
-        {
-          name: '訂單 1',
-          _id: 's1'
-        },
-        {
-          name: '訂單 2',
-          _id: 's2'
-        },
-        {
-          name: '訂單 3',
-          _id: 's3'
-        },
-        {
-          name: '訂單 4',
-          _id: 's4'
-        },
-        {
-          name: '訂單 5',
-          _id: 's5'
-        }                    
-      ]
-    }
+      list: []
+    };
   },
-  methods: {
-  }
-}
+  mounted() {
+    axios
+      .get("/order/find", {
+        headers: {
+          access_token: localStorage.getItem("token")
+        }
+      })
+      .then(res => {
+        console.log(res.data);
+        this.list = res.data;
+      });
+  },
+  methods: {}
+};
 </script>

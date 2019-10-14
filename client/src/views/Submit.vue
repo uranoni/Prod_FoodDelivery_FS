@@ -6,23 +6,15 @@
       </v-flex>
     </v-layout>
     <v-layout>
-      <v-flex mb-6>
+      <v-flex mb-12>
         <v-text-field label="收餐人" outlined v-model="receiver"></v-text-field>
-      </v-flex>
-      <v-spacer></v-spacer>
-      <v-flex mb-6>
-        <v-text-field label="訂餐者" outlined v-model="order"></v-text-field>
       </v-flex>
     </v-layout>
     <v-layout></v-layout>
+
     <v-layout>
       <v-flex mb-12>
-        <v-text-field label="取餐店家/地址" outlined v-model="subaddress"></v-text-field>
-      </v-flex>
-    </v-layout>
-    <v-layout>
-      <v-flex mb-12>
-        <v-text-field label="送餐地址" outlined v-model="readdress"></v-text-field>
+        <v-text-field label="送餐地址" outlined v-model="subaddress"></v-text-field>
       </v-flex>
     </v-layout>
     <v-layout>
@@ -35,31 +27,38 @@
 <script>
 export default {
   data: () => ({
-    items: ["現金", "信用卡", "Line"],
+    items: ["CASH", "CARD", "LINE"],
     receiver: "",
-    order: "",
     subaddress: "",
-    readdress: "",
     paymethods: ""
   }),
+  props: ["orderDate", "orderTime", "menu"],
   methods: {
     suborder() {
-      this.$emit('onSuccess')
-      // axios
-      //   .post("order/createOrder", {
-      //     receiver: this.receiver,
-      //     order: this.order,
-      //     subaddress: this.subaddress,
-      //     readdress: this.readdress,
-      //     paymethods: this.paymethods
-      //   })
-      //   .then(res => {
-      //     console.log(res);
-      //     alert("建立成功");
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //   });
+      this.$emit("onSuccess");
+      axios
+        .post(
+          "/order/create",
+          {
+            arriveTime: this.orderDate + " " + this.orderTime,
+            arriveAddress: this.subaddress,
+            product: this.menu,
+            payment: this.paymethods,
+            reciver: this.receiver
+          },
+          {
+            headers: {
+              access_token: localStorage.getItem("token")
+            }
+          }
+        )
+        .then(res => {
+          console.log(res.data);
+          alert("建立成功");
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };

@@ -2,20 +2,26 @@ const { Router } = require("express");
 const _ = require("lodash");
 const productRouter = Router();
 productRouter.post("/create", async (req, res) => {
-  if (!req.user) {
-    res.status(401).send("User not found");
-  }
-  const { menu_id, name, description, price } = req.body;
+  // if (!req.user) {
+  //   res.status(401).send("User not found");
+  // }
+  const { cal, pic, name, description, price, store } = req.body;
   try {
-    const menu = await req.db.Menu.findOne({ _id: menu_id });
-    if (!menu) {
-      return res.status(404).send("can not find this menu");
-    }
-    const product = new req.db.Product({ name, description, price });
+    // const menu = await req.db.Menu.findOne({ _id: menu_id });
+    // if (!menu) {
+    //   return res.status(404).send("can not find this menu");
+    // }
+    const product = new req.db.Product({
+      name,
+      description,
+      price,
+      cal,
+      pic,
+      store
+    });
     const product_res = await product.save();
-    menu.products.push({ online: true, product: product_res._id });
-    menu.save();
-    return res.send(product);
+
+    return res.send(product_res);
   } catch (error) {
     return res.status(402).send(error);
   }
@@ -36,4 +42,15 @@ productRouter.delete("/remove/:id", async (req, res) => {
   } catch (error) {}
 });
 
+productRouter.get("/getall/:store", async (req, res) => {
+  const { store } = req.params;
+  // console.log("qw");
+  try {
+    const result = await req.db.Product.find({ store: store });
+
+    res.send(result);
+  } catch (error) {
+    res.send("can not found");
+  }
+});
 module.exports = productRouter;
