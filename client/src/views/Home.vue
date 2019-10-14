@@ -12,7 +12,7 @@
               class="white--text subheading mb-3 text-xs-center"
               style="font-weight: 900; text-shadow: 2px 2px #000000"
             >Hot meals can warm people's hearts</div>
-            <v-btn class="blue lighten-2 mt-5" dark large href="/pre-made-themes">開始訂餐</v-btn>
+            <v-btn class="blue lighten-2 mt-5" dark large to="/order">開始訂餐</v-btn>
           </v-layout>
         </v-parallax>
       </section>
@@ -225,10 +225,6 @@ export default {
       console.log("new image height is " + (this.pageHeight - offset));
       return this.pageHeight - offset;
     }
-  },
-
-  mounted: function() {
-    this.calculateHeight();
   }
 };
 </script>

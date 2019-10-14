@@ -1,53 +1,58 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Vue from "vue";
+import Router from "vue-router";
+import Home from "./views/Home.vue";
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'home',
+      path: "/",
+      name: "home",
       component: Home
     },
     {
-      path: '/submit',
-      name: 'submit',
-      component: () => import('./views/Submit.vue')
+      path: "/submit",
+      name: "submit",
+      component: () => import("./views/Submit.vue")
     },
     {
-      path: '/list',
-      name: 'list',
-      component: () => import('./views/List.vue')
+      path: "/list",
+      name: "list",
+      component: () => import("./views/List.vue")
     },
     {
-      path: '/order',
-      name: 'order',
-      component: () => import('./views/v1/Order.vue'),
+      path: "/order",
+      name: "order",
+      component: () => import("./views/v1/Order.vue"),
       meta: {
         keepAlive: true
       }
     },
     {
-      path: '/history',
-      name: 'history',
-      component: () => import('./views/v1/History.vue')
+      path: "/signup",
+      name: "signup",
+      component: () => import("./components/v1/SignUpForm.vue")
     },
     {
-      path: '/qrcode',
-      name: 'qrcode',
-      component: () => import('./views/v1/QRcode.vue')
+      path: "/signin",
+      name: "signin",
+      component: () => import("./components/v1/SignInForm.vue")
     },
     {
-      path: '/driver',
-      name: 'driver',
-      component: () => import('./views/v1/Driver.vue')
+      path: "/history",
+      name: "history",
+      component: () => import("./views/v1/History.vue")
     },
     {
-      path: "/signform",
-      name: "signForm",
-      component: () => import('./components/v1/SignForm.vue')
+      path: "/qrcode",
+      name: "qrcode",
+      component: () => import("./views/v1/QRcode.vue")
+    },
+    {
+      path: "/driver",
+      name: "driver",
+      component: () => import("./views/v1/Driver.vue")
     }
   ]
-})
+});
