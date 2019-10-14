@@ -21,17 +21,45 @@
         <v-stepper-content step="1">
           <v-row>
             <v-col cols="6">
-              <v-text-field label="日期" type="date" outlined v-model="orderDate"></v-text-field>
+              <v-btn
+                style="height: 200%; font-size: 18px; width: 100%"
+                @click="OpenDialog('date')"
+              >選擇日期</v-btn>
             </v-col>
             <v-col cols="6">
-              <select name id>
-                <option value>上午</option>
-                <option value>下午</option>
-              </select>
+              <v-btn
+                style="height: 200%; font-size: 18px; width: 100%"
+                @click="OpenDialog('time')"
+              >選擇時間</v-btn>
             </v-col>
-            <v-col class="text-right">
-              <v-btn color="primary" @click="showStore = !showStore">確認</v-btn>
-            </v-col>
+          </v-row>
+
+          <v-dialog v-model="dialog" width="292">
+            <v-date-picker v-model="orderDate" v-if="dialogMode == 'date'"></v-date-picker>
+            <v-time-picker v-model="orderTime" ampm-in-title v-if="dialogMode == 'time'"></v-time-picker>
+          </v-dialog>
+
+          <v-row style="margin-top: 40px">
+            <v-layout row justify-center align-center>
+              <v-card class="mx-auto">
+                <v-card-text style="font-size: 18px; width: 400px; text-align: center;">
+                  日期：
+                  <span style="color: rgb(200, 0, 0)">{{orderDate}}</span>
+                  <span style="color: rgb(200, 0, 0)" v-if="orderDate == null">0000-0-0</span>
+                </v-card-text>
+                <v-card-text style="font-size: 18px width: 400px; text-align: center;">
+                  時間：
+                  <span style="color: rgb(200, 0, 0)">{{orderTime}}</span>
+                  <span style="color: rgb(200, 0, 0)" v-if="orderTime == null">00:00</span>
+                </v-card-text>
+              </v-card>
+            </v-layout>
+          </v-row>
+
+          <v-row style="margin: 20px">
+            <v-layout row justify-center align-center>
+              <v-btn color="primary" @click="showStore = !showStore" width="120">確認</v-btn>
+            </v-layout>
           </v-row>
 
           <v-divider></v-divider>
@@ -140,6 +168,8 @@ export default {
       showStore: false,
       orderDate: null,
       orderTime: null,
+      dialog: false,
+      dialogMode: null,
       store: [
         {
           name: "Store 1",
@@ -167,6 +197,10 @@ export default {
   methods: {
     _onSuccess() {
       this.$data.e1 = 4;
+    },
+    OpenDialog(mode) {
+      this.dialog = true;
+      this.dialogMode = mode;
     }
   }
 };

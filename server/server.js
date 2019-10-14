@@ -13,6 +13,10 @@ const productRoute = require("./routes/product");
 
 const app = express();
 
+const corsOptions = {
+  exposedHeaders: "access_token"
+};
+
 mongoose
   .connect(`mongodb://${process.env.MONGODB_URI}/${process.env.DATABASE}`, {
     useNewUrlParser: true,
@@ -25,7 +29,7 @@ mongoose
     console.log("Not Connected to Database ERROR! ", err);
   });
 mongoose.set("useCreateIndex", true);
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(morgan("dev"));
 app.use("/uploads", express.static(path.resolve(__dirname, "./uploads")));
 app.use(express.json({ limit: "50mb", extended: true }));
